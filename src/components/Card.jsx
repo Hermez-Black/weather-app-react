@@ -1,13 +1,13 @@
 import React from 'react'
 
-export default function Card() {
+export default function Card({ data, degreesNumber }) {
   return (
     <div className='card'>
-      <img className='item1' src="/2.svg" alt="" />
-      <p className='item2'>19°</p>
-      <div className='item3'>VIENTO<br/>NUBES<br/>PRESION</div>
-      <div className='item4'>Parcialmente<br/>nublado</div>
-      <h2 className='item5'>Ciudad de Mexico, Mexico</h2>
+      <img className='item1' src={`/public/${data?.weather[0]?.icon}.svg`} alt="icon weather api" />
+      <p className='item2'>{degreesNumber}°</p>
+      <div className='item3'>Wind: {data?.wind?.speed}<br/>Clouds: {data?.clouds?.all}<br/>Pressure: {data?.main?.pressure}</div>
+      <div className='item4'>{data?.weather[0]?.description}</div>
+      <h2 className='item5'>{data?.name}, {data?.sys?.country}</h2>
     </div>
   )
 }

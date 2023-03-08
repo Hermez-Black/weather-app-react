@@ -3,7 +3,7 @@ import { SpinnerCircularFixed } from 'spinners-react';
 export default function Loader() {
   return (
     <div className='loader'>
-        <img src="/6.svg" alt="" />
+        <img src="/10n.svg" alt="" />
         <h1 style={{color: 'white', padding: 10}}>
           Weather App
         </h1>

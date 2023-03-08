@@ -3,61 +3,55 @@ import './App.css';
 import { Toaster } from 'react-hot-toast';
 import { callToast, getAxios, makeEndpoint } from './utils/utils';
 import Loader from './components/Loader';
-import Button from './components/Button';
 import Card from './components/Card';
 
 import axios from 'axios';
-
-/*
-  Desarrolla una aplicación que muestre datos del clima, obteniendo de la API los
-  siguientes datos: país, ciudad, icono que describa el clima, la temperatura en grados
-  centígrados, y un botón que cambie la temperatura a grados Fahrenheit.
-
-  Criterios de evaluación:
-  ● Los datos del clima dependen de la ubicación del usuario (3pts).
-  ● Correcto despliegue de datos: país, ciudad, icono que describa el clima, temperatura en
-  grados centígrados. (3pts).
-  ● Botón que cambia de grados centígrados a fahrenheit y viceversa (1pts).
-  ● Hacer que se muestre el icono correspondiente al clima (2 pts).
-  ● Es una aplicación frontend, así que, debe ser un diseño entendible (1pts).
-
-  Retos opcionales
-  ● Hacer un modo obscuro
-  ● Hacer una pantalla de carga.
-  ● Incluir un input que permita buscar el clima en ciudades especificas.
-*/
 
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [dataWeather, setDataWeather] = useState({});
+  const [degrees, setDegrees] = useState(0);
+  const [isCelsius, setIsCelsius] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
       getAxios(makeEndpoint(position.coords?.latitude, position.coords?.longitude), (res) => {
         setDataWeather(res.data);
+        setDegrees(res?.data?.main?.temp);
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
       });
     }, (error) => {
-      console.error("Hubo un problema al intentar traer tus cordenadas", error);
+      alert("Hubo un problema al intentar traer tus cordenadas, concede el permiso por favor");
     });
+    console.log(dataWeather);
   }, []);
 
   if (isLoading) {
     return <Loader />;
   }
 
+  const changeDegrees = () => {
+    setIsCelsius(!isCelsius);
+    if (!isCelsius) {
+      setDegrees(parseInt((degrees - 32) * (5/9)));
+      return;
+    }
+    setDegrees(dataWeather?.main?.temp);
+  }
+
   return (
     <div className="app">
       <h1 style={{color: 'white', marginTop: '10%'}}>Weather App</h1>
-      <Card />
+      <Card data={dataWeather} degreesNumber={degrees} />
       {/* <Toaster
         position='top-center'/> */}
       {/* <button onClick={callToast}>toast</button> switch to dark mode*/}
-      <Button />
+      <div className="space">
+        <input onClick={changeDegrees} className="buttonChange" type="button" value={isCelsius ? "Cambiar a F*" : "Cambiar a C*"} />
+      </div>
     </div>
   );
 }
