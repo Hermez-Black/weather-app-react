@@ -1,13 +1,16 @@
 import React from 'react'
 
-export default function Card({ data, degreesNumber }) {
+export default function Card({ data, degreesNumber}) {
 
-  const icon = data?.weather[0]?.icon;
-
+  const strNameIcon = () => {
+    let iconArray = data?.weather[0]?.icon.split("");
+    iconArray.pop()
+    return iconArray.join("");
+  }
 
   return (
     <div className='card'>
-      <img className='item1' src={`/public/${icon}.svg`} alt="icon weather api" />
+      <img className='item1' src={`/public/${strNameIcon()}n.svg`} alt="icon weather api" />
       <p className='item2'>{degreesNumber}°</p>
       <div className='item3'>Wind: {data?.wind?.speed}<br/>Clouds: {data?.clouds?.all}<br/>Pressure: {data?.main?.pressure}</div>
       <div className='item4'>{data?.weather[0]?.description}</div>

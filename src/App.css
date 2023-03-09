@@ -124,3 +124,16 @@
     padding-top: 15%;
   }
 }
+
+
+/* Tablets */
+
+@media (min-width: 700px) and (max-width: 1200px) {
+  .card {
+    width: 40%;
+  }
+  .item2 {
+    width: 200px;
+    font-size: 70px;
+  }
+}
