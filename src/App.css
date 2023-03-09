@@ -37,8 +37,8 @@
 
 .item1 {
   grid-area: header;
-  width: 90%;
-  height: 80%;
+  width: 200px;
+  height: 200px;
   padding-left: 10px;
 }
 .item2 {
@@ -58,12 +58,17 @@
 
 
 .card {
+  /* clip-path: polygon(0 0, 0 200%, 500% 100%);
+  border-top-right-radius: 80rem 15rem ;
+  border-top-left-radius: 7rem;
+  border-bottom-left-radius: 4rem;
+  border-bottom-right-radius: 4rem; */
   margin-top: 10%;
   background: rgb(229,242,255);
   background: radial-gradient(circle, rgba(229,242,255,1) 0%, rgba(213,243,255,1) 97%);
   border-radius: 30px;
   box-shadow: 1px 5px 2px rgba(0, 0, 0, 0.25);
-  width: 60%;
+  width: 50%;
   padding: 20px;
   color: #026EED;
   display: grid;
@@ -79,6 +84,43 @@
   margin-top: 10%;
 }
 
-@media  {
-  
+/* mobile */
+@media (max-width: 600px) {
+  .card {
+    width: 85%;
+    margin-top: 20%;
+  }
+  .item2 {
+    font-size: 70px;
+    font-weight: 300;
+  }
+  .buttonChange {
+    margin-top: 30%;
+  }
+}
+
+/* Big monitors */
+
+@media (min-width: 1500px) and (max-width: 2000px) {
+  .card {
+    width: 40%;
+    margin-top: 5%;
+  }
+  .buttonChange {
+    margin-top: 0%;
+  }
+  .space {
+    margin-top: 5%;
+  }
+  .item1 {
+    width: 300px;
+    /* background-color: aqua; */
+    margin-left: 20%;
+  }
+  .item2 {
+    width: 200px;
+  }
+  .loader {
+    padding-top: 15%;
+  }
 }
